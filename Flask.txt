@@ -25,3 +25,19 @@ nano requirements.txt
 flask
 
 python3 app.py
+
+Create Dockerfile:-
+nano Dockerfile
+FROM python:3.12
+WORKDIR /Flask-app
+COPY . . 
+RUN pip install -r requirements.txt
+CMD ["python","app.py"]
+
+docker login
+docker build -t <image_name> .
+
+Now create a repository in DockerHub
+
+docker tag <image_name> amit570/<repo_name>:latest
+docker push amit570/<repo_name>:latest
