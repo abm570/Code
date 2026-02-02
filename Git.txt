@@ -1,0 +1,14 @@
+Git ssh key generation:-
+ssh-keygen -t ed25519 -C 'amitrlsbca@gmail.com'
+cat ~/.ssh/id_ed25519.pub
+
+Copy paste the ssd id into the github -> settings -> ssh and gpg keys -> new ssh key
+Click on create SSH Key
+
+Pushing to git repo:-
+git init
+git add .
+git commit -m "Initial Commit"
+git branch -M main
+git remote add origin git@github.com:abm570/<repo_name>.git
+git push -u origin main
