@@ -37,16 +37,17 @@ end
 
 vagrant up
 
-Open New Terminal for Worker Node:-
-vagrant ssh worker
-docker swarm join-token worker
-
-Then copy and paste the token generated in the Worker node terminal
-
-
-
 Open New Terminal for Manager Node:-
 vagrant ssh manager
+docker swarm join-token worker
+
+Copy the token generated
+
+Open New Terminal for Worker Node:-
+vagrant ssh worker
+Paste the token generated in the Worker node terminal
+
+Manager Terminal:-
 docker service create --name <service_name> --replicas 2 -p 5000:5000 amit5570/<Dockerhub_repo_name>:latest
 docker service ls
 docker service ps <service_name>
