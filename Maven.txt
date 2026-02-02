@@ -1,0 +1,43 @@
+sudo apt install openjdk-17-jdk
+sudo apt install maven
+mvn --version
+mvn archetype:generate
+
+Choose archetype: (press Enter for default)
+Select number 8 or later version
+groupId: com.example
+artifactId: simple-maven
+version: 1.0-SNAPSHOT (press Enter for default)
+package: com.example (press Enter for default)
+
+Add the following code into the pom.xml file:-
+<plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.3.0</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <mainClass>com.example.App</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+
+cd simple-maven
+mvn compile
+mvn package
+java -cp target/<SNAPSHOT.jar file> <package name>
+Example: java -cp target/simple-maven-1.0-SNAPSHOT.jar com.example.App
+
+TO MODIFY ANY CODE FOR DIFFERENT OUTPUT:-
+nano src/main/java/com/example/App.java
+
+MAKE THE CHANGES IN THIS FILE
+
+Dockerfile:-
+FROM eclipse-temurin:17-jdk
+WORKDIR /simple-maven
+COPY target/*.jar app.jar
+EXPOSE 3000
+CMD ["java","-jar","app.jar"]
