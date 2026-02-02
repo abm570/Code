@@ -37,7 +37,7 @@ CMD ["python","app.py"]
 docker login
 docker build -t <image_name> .
 
-Now create a repository in DockerHub
+Now create a repository in DockerHub:-
 
 docker tag <image_name> amit570/<repo_name>:latest
 docker push amit570/<repo_name>:latest
