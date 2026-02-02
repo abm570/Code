@@ -1,0 +1,17 @@
+npx create-react-app <folder_name>
+
+Go to:-
+cd <folder_name>
+cd <folder_name>/src
+
+Open App.js:-
+Make desired changes
+
+Dockerfile:- (Always remeber for react there are always 2 COPY and react's by default port number is 3000)
+FROM node:18
+WORKDIR /my-app
+COPY package*.json .
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm","start"]
