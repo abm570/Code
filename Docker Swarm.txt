@@ -1,0 +1,59 @@
+mkdir swarm-lab
+cd swarm-lab
+
+nano Vagrantfile
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "manager" do |manager|
+    manager.vm.box = "ubuntu/focal64"
+    manager.vm.hostname = "manager"
+    manager.vm.network "private_network", ip: "192.168.56.10"
+    manager.vm.provision "shell", inline: <<-SHELL
+      apt update
+      apt install -y docker.io
+      systemctl start docker
+      systemctl enable docker
+      usermod -aG docker vagrant
+      docker swarm init --advertise-addr 192.168.56.10
+    SHELL
+  end
+
+  config.vm.define "worker" do |worker|
+    worker.vm.box = "ubuntu/focal64"
+    worker.vm.hostname = "worker"
+    worker.vm.network "private_network", ip: "192.168.56.11"
+    worker.vm.provision "shell", inline: <<-SHELL
+      apt update
+      apt install -y docker.io
+      systemctl start docker
+      systemctl enable docker
+      usermod -aG docker vagrant
+    SHELL
+  end
+
+end
+
+
+vagrant up
+
+Open New Terminal for Worker Node:-
+vagrant ssh worker
+docker swarm join-token worker
+
+Then copy and paste the token generated in the Worker node terminal
+
+
+
+Open New Terminal for Manager Node:-
+vagrant ssh manager
+docker service create --name <service_name> --replicas 2 -p 5000:5000 amit5570/<Dockerhub_repo_name>:latest
+docker service ls
+docker service ps <service_name>
+
+Copy and paste the IP Address to test the working
+http://192.168.56.10:5000
+
+If it says port number already in use then do, to remove the services:
+docker ps
+docker service rm <service_name>
