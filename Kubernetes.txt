@@ -11,3 +11,8 @@ kubectl get pods
 Creating Minikube Servies:-
 minikube service <service_name>
 minikube dashboard
+
+For removing images, services and pods:-
+docker rmi IMAGE_ID
+docker service rm SERVICE_NAME
+kubectl delete pod POD_NAME
