@@ -1,0 +1,13 @@
+Creating Jobs for simple printing statements Program:-
+kubectl create job <job_name> --image=amit570/<image_name>:1.0
+kubectl get jobs
+
+Creating Pods:-
+kubectl create deployment <service_name> --image=amit570/<docker_repo_name>:latest or 1.0
+kubectl expose deployment <service_name> --type=NodePort -- port=5000
+kubectl get pods
+
+Start Minikube:-
+minikube start
+minikube service <service_name>
+minikube dashboard
